@@ -1,9 +1,11 @@
 import React from 'react'
-import Section from './section'
-const section1 = () => {
+import { graphql } from "gatsby"
+import Img from 'gatsby-image'
+
+const section1 = ({ data }) => {
   return (
-    <Section>
-      <div className='d-flex flex-column innerSection'>
+    <section className='section1'>
+      <div className='container d-flex flex-column innerSection'>
         <h1 className='text-center'>
           Noisy Notes, senin için not tutar.
         </h1>
@@ -13,9 +15,13 @@ const section1 = () => {
           Hadi, notlarınızı sesli olarak tutun!
         </p>
         <button className='btn'>Ücretsiz Üye Ol</button>
+        <Img
+          className='s1Img'
+          loading='lazy'
+          fluid={data}
+        />
       </div>
-      <div className='s1-img' />
-    </Section>
+    </section>
   )
 }
 
