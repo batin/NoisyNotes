@@ -63,6 +63,7 @@ section {
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+
   }
   
 }
@@ -89,18 +90,20 @@ section {
     background-color: rgba($color: $fourth, $alpha: .6);
     width: 50vw;
     height: 100vh;
-    .s2Img {
+    .s2Img2 {
       width: 30vh;
       margin: 20px auto;
+      overflow: visible !important;
     }
   }
 
   .left {
     width: 50vw;
     height: 100vh;
-    .s1Img {
+    .s2Img1 {
       width: 30vh;
       margin: 20px auto;
+      overflow: visible !important;
     }
   }
   @media only screen and (max-width: 760px) {

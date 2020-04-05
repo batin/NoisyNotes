@@ -28,7 +28,7 @@ const Section1 = () => {
       <div className='d-flex innerSection'>
         <div className='left d-flex flex-column justify-content-center text-center'>
           <Img
-            className='s1Img'
+            className='s2Img1'
             loading='lazy'
             fluid={data.s2Img1.childImageSharp.fluid}
           />
@@ -37,7 +37,7 @@ const Section1 = () => {
         </div>
         <div className='right d-flex flex-column justify-content-center text-center'>
           <Img
-            className='s2Img'
+            className='s2Img2'
             loading='lazy'
             fluid={data.s2Img2.childImageSharp.fluid}
           />
