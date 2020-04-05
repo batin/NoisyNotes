@@ -1,7 +1,12 @@
 html, body {
   background-color: $bg;
   font-family: $font;
-} 
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
 
 section {
   height: 100vh;
