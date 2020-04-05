@@ -68,19 +68,9 @@ section {
 }
 
 .section2 {
-  @media only screen and (max-width: 760px) {
-    .innerSection{
-      display: inline !important;
-    }
-    .right {
-      width: 100vw !important;
-    }
-    .left {
-      width: 100vw !important;
-    }
-  }
+
   h2 {
-    margin: auto;
+    margin: 30px auto;
     width: 80%;
     font-size: 48px;
     line-height: 65px;
@@ -88,7 +78,7 @@ section {
   }
   
   p {
-    margin: auto;
+    margin: 30px auto;
     width: 80%;
     font-size: 18px;
     line-height: 25px;
@@ -100,7 +90,7 @@ section {
     width: 50vw;
     height: 100vh;
     .s2Img {
-      width: 40vh;
+      width: 30vh;
       margin: 20px auto;
     }
   }
@@ -109,8 +99,28 @@ section {
     width: 50vw;
     height: 100vh;
     .s1Img {
-      width: 40vh;
+      width: 30vh;
       margin: 20px auto;
+    }
+  }
+  @media only screen and (max-width: 760px) {
+    .innerSection{
+      display: inline !important;
+    }
+    .right {
+      width: 100vw !important;
+    }
+    .left {
+      width: 100vw !important;
+    }
+    h2 {
+      font-size: 38px;
+      line-height: 55px;
+    }
+    
+    p {
+      font-size: 15px;
+      line-height: 25px;
     }
   }
 }
