@@ -23,8 +23,8 @@ const Header = () => {
         fluid={data.headerImg.childImageSharp.fluid}
       />
       <div className='d-flex buttons'>
-        <button className='btn btn-1'>giris yap</button>
-        <button className='btn btn-2'>kayit ol</button>
+        <button className='btn btn-1'>Giriş yap</button>
+        <button className='btn btn-2'>Üye ol</button>
       </div>
     </header>
   )

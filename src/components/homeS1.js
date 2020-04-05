@@ -27,12 +27,12 @@ const Section1 = () => {
           Hadi, notlarınızı sesli olarak tutun!
         </p>
         <button className='btn'>Ücretsiz Üye Ol</button>
-        <Img
-          className='s1Img'
-          loading='lazy'
-          fluid={data.s1Img.childImageSharp.fluid}
-        />
       </div>
+      <Img
+        className='s1Img'
+        loading='lazy'
+        fluid={data.s1Img.childImageSharp.fluid}
+      />
     </section>
   )
 }

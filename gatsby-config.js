@@ -25,16 +25,14 @@ module.exports = {
         background_color: '#663399',
         theme_color: '#663399',
         display: 'minimal-ui',
-        icon: 'src/images/logo.svg' // This path is relative to the root of the site.
+        icon: 'src/images/favicon.png' // This path is relative to the root of the site.
       }
     },
     {
       resolve: 'gatsby-plugin-google-fonts',
       options: {
         fonts: [
-          'Nunito',
-          'Permanent Marker',
-          'source sans pro\:300,400,400i,700'
+          'Nunito\:300,400,700,900'
         ],
         display: 'swap'
       }
