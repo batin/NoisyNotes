@@ -1,16 +1,63 @@
-import React from "react"
-import { Link } from "gatsby"
+// import React, { useState } from 'react'
+// import Layout from '../components/layout'
+// import Seo from '../components/seo'
+// import Recorder from 'react-mp3-recorder'
+// import ReactAudioPlayer from 'react-audio-player'
+// import blobToBuffer from 'blob-to-buffer'
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+// const recordPage = () => {
+//   const [url, setUrl] = useState('')
 
-const SecondPage = () => (
-  <Layout>
-    <SEO title="Page two" />
-    <h1>Hi from the second page</h1>
-    <p>Welcome to page 2</p>
-    <Link to="/">Go back to the homepage</Link>
-  </Layout>
-)
+//   const _onRecordingComplete = blob => {
+//     blobToBuffer(blob, (err, buffer) => {
+//       if (err) {
+//         console.error(err)
+//         return
+//       }
 
-export default SecondPage
+//       console.log('recording', blob)
+
+//       if (url) {
+//         window.URL.revokeObjectURL(url)
+//       }
+
+//       setUrl(window.URL.createObjectURL(blob))
+//     })
+//   }
+
+//   const _onRecordingError = err => {
+//     console.log('error recording', err)
+
+//     if (url) {
+//       window.URL.revokeObjectURL(url)
+//     }
+
+//     setUrl(null)
+//   }
+//   return (
+//     <Layout>
+//       <Seo title='Page-2' />
+//       <div
+//         className='container d-flex flex-column justify-content-center
+//         text-center align-center h-100'
+//       >
+//         <div>
+//           <Recorder
+//             onRecordingComplete={_onRecordingComplete}
+//             onRecordingError={_onRecordingError}
+//             className='m-auto'
+//           />
+
+//           <p>Click and hold to start recording.</p>
+//           {url && (
+//             <div>
+//               <ReactAudioPlayer src={url} controls />
+//             </div>
+//           )}
+//         </div>
+//       </div>
+//     </Layout>
+//   )
+// }
+
+// export default recordPage

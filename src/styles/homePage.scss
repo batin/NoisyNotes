@@ -1,0 +1,67 @@
+html, body {
+  background-color: $bg;
+  font-family: $font;
+} 
+
+section {
+  height: 100vh;
+  width: 100vw;
+}
+.innerSection {
+
+  padding-top: 20vh ;
+  width: 50%;
+  margin: auto;
+  
+  h1 {
+    font-size: 48px;
+    line-height: 65px;
+    font-weight: 900;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 25px;
+  }
+
+  button {
+    width: 170px;
+    height: 50px;
+    max-height: unset !important;
+    text-transform: capitalize;
+    align-self: center;
+    background-color: $button;
+    max-height: fit-content;
+    border-radius: 5px;
+    color: $white;
+    margin-right: 10px;
+    margin-bottom: 50px;
+  }
+  @media only screen and (max-width: 760px) {
+    padding-top: 10vh; 
+    width: 80%; 
+    h1 {
+      font-size: 38px;
+      line-height: 55px;
+    }
+
+    p {
+      font-size: 12px;
+      line-height: 25px;
+    }
+    
+    button {
+      width: 150px;
+      height: 35px ;
+    }
+  }
+}
+
+.s1-img {
+  height: 40vh;
+  width: 100%;
+  background-image: url(../images/s1.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
