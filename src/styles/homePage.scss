@@ -60,8 +60,6 @@ section {
   }
   
   .s1Img {
-    height: 40vh;
-    width: 50vw; 
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -70,16 +68,49 @@ section {
 }
 
 .section2 {
-  .left {
-    width: 50vw;
-    height: 100vh;
+  @media only screen and (max-width: 760px) {
+    .innerSection{
+      display: inline !important;
+    }
+    .right {
+      width: 100vw !important;
+    }
+    .left {
+      width: 100vw !important;
+    }
   }
+  h2 {
+    margin: auto;
+    width: 80%;
+    font-size: 48px;
+    line-height: 65px;
+    font-weight: 900;
+  }
+  
+  p {
+    margin: auto;
+    width: 80%;
+    font-size: 18px;
+    line-height: 25px;
+  }
+
   .right {
+    color: $white;
     background-color: rgba($color: $fourth, $alpha: .6);
     width: 50vw;
     height: 100vh;
-    .rImg {
+    .s2Img {
+      width: 40vh;
+      margin: 20px auto;
+    }
+  }
 
+  .left {
+    width: 50vw;
+    height: 100vh;
+    .s1Img {
+      width: 40vh;
+      margin: 20px auto;
     }
   }
 }

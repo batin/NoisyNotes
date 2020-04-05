@@ -1,8 +1,20 @@
 import React from 'react'
-import { graphql } from "gatsby"
 import Img from 'gatsby-image'
+import { graphql, useStaticQuery } from 'gatsby'
 
-const section1 = ({ data }) => {
+const Section1 = () => {
+  const data = useStaticQuery(graphql`
+    {
+      s1Img: file(relativePath: { eq: "s1.png" }) {
+        childImageSharp {
+          fluid(quality: 100) {
+            ...GatsbyImageSharpFluid_tracedSVG
+          }
+        }
+      }
+    }
+  `)
+
   return (
     <section className='section1'>
       <div className='container d-flex flex-column innerSection'>
@@ -18,11 +30,11 @@ const section1 = ({ data }) => {
         <Img
           className='s1Img'
           loading='lazy'
-          fluid={data}
+          fluid={data.s1Img.childImageSharp.fluid}
         />
       </div>
     </section>
   )
 }
 
-export default section1
+export default Section1

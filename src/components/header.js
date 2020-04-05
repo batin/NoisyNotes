@@ -1,9 +1,27 @@
 import React from 'react'
+import Img from 'gatsby-image'
+import { graphql, useStaticQuery } from 'gatsby'
 
 const Header = () => {
+  const data = useStaticQuery(graphql`
+    {
+      headerImg: file(relativePath: { eq: "logo.png" }) {
+        childImageSharp {
+          fluid(quality: 100) {
+            ...GatsbyImageSharpFluid_tracedSVG
+          }
+        }
+      }
+    }
+  `)
+
   return (
     <header className='container-fluid d-flex w-100 header justify-content-between'>
-      <div className='header-img' />
+      <Img
+        className='header-img'
+        loading='lazy'
+        fluid={data.headerImg.childImageSharp.fluid}
+      />
       <div className='d-flex buttons'>
         <button className='btn btn-1'>giris yap</button>
         <button className='btn btn-2'>kayit ol</button>
