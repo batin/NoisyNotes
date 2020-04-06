@@ -10101,6 +10101,13 @@ react-hot-loader@^4.12.20:
     shallowequal "^1.1.0"
     source-map "^0.7.3"
 
+react-icons@^3.9.0:
+  version "3.9.0"
+  resolved "https://registry.npm.taobao.org/react-icons/download/react-icons-3.9.0.tgz#89a00f20a0e02e6bfd899977eaf46eb4624239d5"
+  integrity sha1-iaAPIKDgLmv9iZl36vRutGJCOdU=
+  dependencies:
+    camelcase "^5.0.0"
+
 react-is@^16.7.0, react-is@^16.8.1:
   version "16.8.3"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.3.tgz#4ad8b029c2a718fc0cfc746c8d4e1b7221e5387d"

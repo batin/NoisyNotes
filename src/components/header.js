@@ -1,6 +1,6 @@
-import React from 'react'
-import Img from 'gatsby-image'
-import { graphql, useStaticQuery } from 'gatsby'
+import React from "react"
+import Img from "gatsby-image"
+import { graphql, useStaticQuery } from "gatsby"
 
 const Header = () => {
   const data = useStaticQuery(graphql`
@@ -16,15 +16,15 @@ const Header = () => {
   `)
 
   return (
-    <header className='container-fluid d-flex w-100 header justify-content-between'>
+    <header className="container-fluid d-flex w-100 header justify-content-between">
       <Img
-        className='header-img'
-        loading='lazy'
+        className="header-img"
+        loading="lazy"
         fluid={data.headerImg.childImageSharp.fluid}
       />
-      <div className='d-flex buttons'>
-        <button className='btn btn-1'>Giriş yap</button>
-        <button className='btn btn-2'>Üye ol</button>
+      <div className="d-flex buttons">
+        <button className="btn btn-1">Giriş yap</button>
+        <button className="btn btn-2">Üye ol</button>
       </div>
     </header>
   )

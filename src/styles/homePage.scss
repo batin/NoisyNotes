@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   background-color: $bg;
   font-family: $font;
   overflow-x: hidden;
@@ -19,19 +20,19 @@ section {
     padding-top: 15vh;
     width: 35%;
     margin: auto;
-    
+
     h1 {
       font-size: 48px;
       line-height: 65px;
       font-weight: 900;
     }
-    
+
     p {
       margin-top: 20px;
       font-size: 18px;
       line-height: 25px;
     }
-    
+
     button {
       margin-top: 10px;
       width: 170px;
@@ -47,24 +48,22 @@ section {
       margin-bottom: 50px;
     }
     @media only screen and (max-width: 760px) {
-      padding-top: 10vh; 
-      width: 80%; 
+      padding-top: 10vh;
+      width: 80%;
       h1 {
         font-size: 38px;
         line-height: 55px;
       }
-      
+
       p {
         font-size: 12px;
         line-height: 25px;
       }
-      
+
       button {
         width: 150px;
-        height: 35px ;
+        height: 35px;
       }
-
-      
     }
   }
 
@@ -75,23 +74,19 @@ section {
     background-position: center;
     background-size: contain;
   }
-  
+
   @media only screen and (max-width: 760px) {
     .s1Img {
-      width: 100% !important;  
-    }
-  }
-  
-  @media only screen and (max-width: 320px) {
-    .s1Img {
-      width: 60% !important;  
+      width: 100% !important;
     }
   }
 
+  @media only screen and (max-width: 320px) {
+    height: 130vh;
+  }
 }
 
 .section2 {
-
   h2 {
     margin: 30px auto;
     width: 80%;
@@ -99,7 +94,7 @@ section {
     line-height: 65px;
     font-weight: 900;
   }
-  
+
   p {
     margin: 30px auto;
     width: 80%;
@@ -109,7 +104,7 @@ section {
 
   .right {
     color: $white;
-    background-color: rgba($color: $fourth, $alpha: .6);
+    background-color: rgba($color: $fourth, $alpha: 0.6);
     width: 50vw;
     height: 100vh;
     .s2Img2 {
@@ -129,7 +124,8 @@ section {
     }
   }
   @media only screen and (max-width: 760px) {
-    .innerSection{
+    height: 200vh !important;
+    .innerSection {
       display: inline !important;
     }
     .right {
@@ -139,13 +135,144 @@ section {
       width: 100vw !important;
     }
     h2 {
-      font-size: 38px;
-      line-height: 55px;
+      font-size: 30px;
+      line-height: 45px;
     }
-    
+
     p {
       font-size: 15px;
       line-height: 25px;
+    }
+  }
+}
+
+.section3 {
+  height: 50vh;
+  background-color: $white;
+  position: relative;
+  .s3Item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    margin-bottom: 10%;
+    color: $secondary;
+
+    svg {
+      font-size: 10vh;
+      margin: 20px 0;
+      circle {
+        fill: $secondary;
+      }
+    }
+
+    h4 {
+      margin: 20px 0;
+      left: 0;
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 27px;
+    }
+
+    p {
+      color: rgba($color: $secondary, $alpha: 0.85);
+      font-size: 16px;
+      line-height: 22px;
+    }
+  }
+  button {
+    position: absolute;
+    margin-top: 230px;
+    width: 170px;
+    height: 50px;
+    align-self: center;
+    justify-self: center;
+    background-color: $fourth;
+    max-height: fit-content;
+    border-radius: 5px;
+    color: $white !important;
+  }
+
+  @media only screen and (max-width: 760px) {
+    .s3Item {
+      align-items: center;
+      &:first-child {
+        svg {
+          margin-bottom: 35px;
+        }
+      }
+      svg {
+        font-size: 6vh;
+      }
+
+      h4 {
+        font-size: 15px;
+        line-height: 17px;
+      }
+
+      p {
+        font-size: 8px;
+        line-height: 15px;
+        margin: 0px -10px;
+      }
+      button {
+        width: 150px;
+        height: 35px;
+        margin-top: 22vh;
+      }
+    }
+  }
+  @media only screen and (max-width: 320px) {
+    height: 55vh;
+    .s3Item {
+      &:first-child {
+        svg {
+          margin-bottom: 20px;
+        }
+      }
+      button {
+        width: 100px;
+        height: 30px;
+        font-size: 10px;
+        margin-top: 1vh;
+        margin-left: -18px;
+      }
+    }
+  }
+}
+
+.section4 {
+  height: 50vh;
+  background-color: $secondary;
+  color: rgba($color: $bg, $alpha: 0.7);
+  h5 {
+    color: $white;
+    margin-bottom: 30px;
+    font-size: 18px;
+    line-height: 25px;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 25px;
+  }
+
+  a {
+    color: $fourth;
+  }
+
+  .s4Img {
+    margin-bottom: 30px;
+  }
+  @media only screen and (max-width: 760px) {
+    p {
+      font-size: 12px;
+      line-height: 15px;
+    }
+    h5 {
+      font-size: 15px;
+      line-height: 17px;
     }
   }
 }
