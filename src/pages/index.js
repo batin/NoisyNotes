@@ -9,7 +9,7 @@ import "../styles/index.scss"
 
 const IndexPage = () => {
   return (
-    <Layout>
+    <Layout pageName="Home">
       <Seo title="Home" />
       <Section1 />
       <Section2 />

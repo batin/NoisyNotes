@@ -1,0 +1,44 @@
+.register {
+  height: 100vh;
+  background-color: $white;
+  .content {
+    height: 90vh;
+    .logo {
+      width: 30vh;
+    }
+    h1 {
+      color: $secondary;
+    }
+    p {
+      margin-top: 20px;
+      width: 40vh;
+      a {
+        color: $fourth;
+        text-decoration: none;
+      }
+    }
+  }
+  .footer {
+    height: 10vh;
+    background-color: $bg;
+    bottom: 0 !important;
+    h5 {
+      font-size: 14px;
+      line-height: 19px;
+      color: rgba($color: $secondary, $alpha: 0.5);
+    }
+    a {
+      color: $secondary;
+    }
+  }
+}
+@media only screen and (max-width: 760px) {
+  .register {
+    p {
+      width: 75vw !important;
+    }
+  }
+}
+.dark {
+  background-color: $secondary;
+}

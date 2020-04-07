@@ -1,6 +1,7 @@
 import React from "react"
 import Img from "gatsby-image"
 import { graphql, useStaticQuery } from "gatsby"
+import { navigate } from "gatsby"
 
 const Header = () => {
   const data = useStaticQuery(graphql`
@@ -23,8 +24,23 @@ const Header = () => {
         fluid={data.headerImg.childImageSharp.fluid}
       />
       <div className="d-flex buttons">
-        <button className="btn btn-1">Giriş yap</button>
-        <button className="btn btn-2">Üye ol</button>
+        <button
+          onClick={() => {
+            navigate("/login")
+          }}
+          className="btn btn-1"
+        >
+          {" "}
+          Giriş yap
+        </button>
+        <button
+          onClick={() => {
+            navigate("/register")
+          }}
+          className="btn btn-2"
+        >
+          Üye ol
+        </button>
       </div>
     </header>
   )

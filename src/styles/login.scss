@@ -1,0 +1,74 @@
+.input {
+  background-color: $bg;
+  box-shadow: none;
+  outline: none;
+  border: none;
+  width: 40vh;
+  height: 50px;
+  border-radius: 5px;
+  padding-left: 15px;
+  font-size: 14px;
+  line-height: 15px;
+  color: $secondary;
+  &:focus,
+  &:hover {
+    border: 1px solid $fourth;
+  }
+  &::placeholder {
+    color: rgba($color: $secondary, $alpha: 0.5);
+  }
+}
+
+.button {
+  width: 40vh;
+  height: 50px;
+  background-color: $fourth;
+  color: $white;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 15px;
+  max-height: unset !important;
+  outline: none;
+  color: $white !important;
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  .input {
+    width: 75vw;
+  }
+  .button {
+    width: 75vw;
+  }
+}
+
+.login {
+  height: 100vh;
+  background-color: $white;
+  .content {
+    height: 90vh;
+    .logo {
+      width: 30vh;
+    }
+
+    h1 {
+      color: $secondary;
+    }
+  }
+
+  .footer {
+    height: 10vh;
+    background-color: $bg;
+    bottom: 0 !important;
+    h5 {
+      font-size: 14px;
+      line-height: 19px;
+      color: rgba($color: $secondary, $alpha: 0.5);
+    }
+    a {
+      color: $secondary;
+    }
+  }
+}

@@ -1,24 +1,16 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+const Layout = ({ children, pageName }) => {
+  const isHeaderEnabled = () => {
+    return pageName === ("Home" || "404")
+  }
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      {isHeaderEnabled() ? <Header /> : <div />}
       {children}
-      <footer />
     </>
   )
 }
