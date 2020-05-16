@@ -1,6 +1,7 @@
 import React from "react"
 import Img from "gatsby-image"
 import { graphql, useStaticQuery } from "gatsby"
+import { navigate } from "gatsby"
 
 const Section1 = () => {
   const data = useStaticQuery(graphql`
@@ -23,7 +24,14 @@ const Section1 = () => {
           Not tutmayı denediniz ve bir süre sonra yorulup devam etmeyi
           bıraktınız değil mi? Hadi, notlarınızı sesli olarak tutun!
         </p>
-        <button className="btn">Ücretsiz Üye Ol</button>
+        <button
+          onClick={() => {
+            navigate("/register")
+          }}
+          className="btn"
+        >
+          Ücretsiz Üye Ol
+        </button>
       </div>
       <Img
         className="s1Img"

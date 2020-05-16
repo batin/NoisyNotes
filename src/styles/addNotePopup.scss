@@ -1,0 +1,68 @@
+.addNotePopup {
+  width: 350px;
+  // height: 300px;
+  .closeBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: $third !important;
+    cursor: pointer;
+    transition: transform 0.4s;
+    border-radius: 50%;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  .buttons {
+    color: $fourth;
+    margin-top: 30px;
+    svg {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+  }
+
+  .noteInput {
+    border: 2px solid $fourth;
+    border-radius: 5px;
+    padding-left: 10px;
+    height: 30px;
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
+    &:focus {
+      outline: none;
+    }
+  }
+  .recorder {
+    div {
+      background: $third;
+    }
+  }
+  .player {
+    audio {
+      outline: none !important;
+      border: 2px solid $fourth;
+      border-radius: 50px;
+    }
+  }
+  .save {
+    margin-top: 30px !important;
+    width: 100px;
+    height: 35px;
+  }
+
+  @media only screen and (max-width: 760px) {
+    width: 250px;
+  }
+  @media only screen and (max-width: 320px) {
+    width: 200px;
+    input {
+      width: 200px;
+    }
+    audio {
+      width: 250px;
+      color: $fourth !important;
+    }
+  }
+}

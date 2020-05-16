@@ -4,13 +4,13 @@ import Header from "./header"
 
 const Layout = ({ children, pageName }) => {
   const isHeaderEnabled = () => {
-    return pageName === ("Home" || "404")
+    return pageName === "Home" || pageName === "404" || pageName === "Notlarım"
   }
 
   return (
     <>
       {isHeaderEnabled() ? <Header /> : <div />}
-      {children}
+      <main>{children}</main>
     </>
   )
 }

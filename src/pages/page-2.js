@@ -34,6 +34,7 @@ const RecordPage = () => {
 
     setUrl(null)
   }
+  
   return (
     <Layout>
       <Seo title="Page-2" />

@@ -1,0 +1,107 @@
+.emptyState {
+  padding-top: 15vh;
+  width: 35%;
+  margin: auto;
+
+  img {
+    width: 120%;
+  }
+
+  button {
+    width: 170px;
+    height: 50px;
+    text-transform: capitalize;
+    align-self: center;
+    background-color: $third;
+    border-radius: 5px;
+    color: $white;
+    .plus {
+      margin-right: 10px;
+    }
+  }
+
+  h1 {
+    font-size: 35px;
+    font-weight: bold;
+    min-width: 600px;
+    text-align: center;
+    margin-bottom: 10vh;
+    margin-top: 5vh;
+  }
+  @media only screen and (max-width: 760px) {
+    padding-top: 10vh;
+    width: 80%;
+    h1 {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10vh;
+      min-width: 400px;
+    }
+  }
+}
+
+.popupContainer {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 9;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba($color: #000000, $alpha: 0.7);
+
+  .popup {
+    position: relative;
+    background-color: $white;
+    padding: 40px;
+    z-index: 99;
+    align-self: center;
+  }
+}
+
+.normalState {
+  padding-top: 8vh;
+  background-color: $white;
+  .searchBar {
+    width: 100vw;
+    height: 50px;
+    background-color: $bg;
+    input {
+      margin-left: 15px;
+      border: none;
+      border-radius: 5px;
+      padding-left: 10px;
+      height: 30px;
+      box-shadow: none;
+      outline: none;
+      border-radius: 5px;
+      padding-left: 15px;
+      font-size: 14px;
+      line-height: 15px;
+      color: $secondary;
+      &:focus,
+      &:hover {
+        border: 1px solid $fourth;
+      }
+      &::placeholder {
+        color: rgba($color: $secondary, $alpha: 0.5);
+      }
+    }
+    button {
+      align-self: center;
+      width: 100px;
+      font-size: 12px;
+      height: 30px;
+      text-transform: capitalize;
+      align-self: center;
+      background-color: $third;
+      border-radius: 5px;
+      color: $white;
+      margin-right: 15px;
+      .plus {
+        margin-right: 5px;
+      }
+    }
+  }
+}

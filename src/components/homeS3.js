@@ -1,6 +1,7 @@
 import React from "react"
 import { FiMusic } from "react-icons/fi"
 import { FaSearch, FaPlay } from "react-icons/fa"
+import { navigate } from "gatsby"
 
 const Section3 = () => {
   return (
@@ -21,7 +22,14 @@ const Section3 = () => {
             Vero mi nascetur. Usus's eum ex'se corrupti hic privato hac hitmari
             per in minim ordinum sentiunt.
           </p>
-          <button className="btn">Ücretsiz Üye Ol</button>
+          <button
+            onClick={() => {
+              navigate("/register")
+            }}
+            className="btn"
+          >
+            Ücretsiz Üye Ol
+          </button>
         </div>
         <div className="col-4 s3Item">
           <FaPlay />

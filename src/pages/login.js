@@ -4,7 +4,7 @@ import Seo from "../components/seo"
 import { graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
 import "../styles/index.scss"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 
 const LoginPage = () => {
   const [email, setEmail] = useState("")
@@ -22,7 +22,7 @@ const LoginPage = () => {
   `)
 
   const login = () => {
-    console.log("login")
+    navigate("/notes")
   }
 
   return (
@@ -30,11 +30,13 @@ const LoginPage = () => {
       <Seo title="Login" />
       <section className="login">
         <div className="container d-flex flex-column justify-content-center align-items-center content">
-          <Img
-            className="logo"
-            loading="lazy"
-            fluid={data.headerImg.childImageSharp.fluid}
-          />
+          <Link>
+            <Img
+              className="logo"
+              loading="lazy"
+              fluid={data.headerImg.childImageSharp.fluid}
+            />
+          </Link>
           <h1 className="mt-5 mb-5">Hoşgeldin!</h1>
           <div className="mb-3 mt-5">
             <input

@@ -8,6 +8,7 @@
     "blob-to-buffer": "^1.2.8",
     "bootstrap": "^4.4.1",
     "gatsby": "^2.19.45",
+    "gatsby-cli": "^2.11.5",
     "gatsby-image": "^2.2.44",
     "gatsby-plugin-google-fonts": "^1.0.1",
     "gatsby-plugin-manifest": "^2.2.48",
@@ -26,7 +27,9 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
     "react-icons": "^3.9.0",
-    "react-mp3-recorder": "^1.1.2"
+    "react-mp3-recorder": "^1.1.2",
+    "stylelint": "^13.3.1",
+    "stylelint-config-sass-guidelines": "^7.0.0"
   },
   "devDependencies": {
     "prettier": "^1.19.1"
