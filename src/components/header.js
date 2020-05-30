@@ -1,12 +1,12 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import Img from "gatsby-image"
 import { graphql, useStaticQuery, Link } from "gatsby"
 import { navigate } from "gatsby"
-import { GlobalDispatchContext, GlobalStateContext } from "../services/auth"
+import { AuthContext } from "../services/auth"
 
 const Header = () => {
-  const state = useContext(GlobalStateContext)
-  const dispatch = useContext(GlobalDispatchContext)
+  const state = useContext(AuthContext)
+  const [path, setPath] = useState("")
   const data = useStaticQuery(graphql`
     {
       headerImg: file(relativePath: { eq: "logo.png" }) {
@@ -18,6 +18,13 @@ const Header = () => {
       }
     }
   `)
+
+  useEffect(() => {
+    if (window) {
+      setPath(window.location.pathname)
+    }
+  })
+
   return (
     <header className="container-fluid d-flex w-100 header justify-content-between">
       <Img
@@ -47,10 +54,7 @@ const Header = () => {
         </div>
       ) : (
         <div className="d-flex navigators">
-          <Link
-            to="/notes"
-            className={window.location.pathname === "/notes" ? "active" : ""}
-          >
+          <Link to="/notes" className={path === "/notes" ? "active" : ""}>
             Notlarım
           </Link>
           <Link to="/">Çıkış Yap</Link>

@@ -8,7 +8,7 @@
     "blob-to-buffer": "^1.2.8",
     "bootstrap": "^4.4.1",
     "gatsby": "^2.19.45",
-    "gatsby-cli": "^2.11.5",
+    "gatsby-cli": "^2.12.29",
     "gatsby-image": "^2.2.44",
     "gatsby-plugin-google-fonts": "^1.0.1",
     "gatsby-plugin-manifest": "^2.2.48",
@@ -32,6 +32,7 @@
     "stylelint-config-sass-guidelines": "^7.0.0"
   },
   "devDependencies": {
+    "eslint-plugin-react-hooks": "^4.0.2",
     "prettier": "^1.19.1"
   },
   "keywords": [

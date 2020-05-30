@@ -6,10 +6,11 @@ import { IoIosCloseCircle } from "react-icons/io"
 import { AiFillDelete } from "react-icons/ai"
 import { FaEdit } from "react-icons/fa"
 
-const Note = ({ close }) => {
+const Note = ({ close, data }) => {
   const [edit, setEdit] = useState(false)
-  const [url, setUrl] = useState("")
-
+  const [url, setUrl] = useState(data.url)
+  const [name, setName] = useState(data.name)
+  console.log(data)
   const _onRecordingComplete = blob => {
     blobToBuffer(blob, (err, buffer) => {
       if (err) {
@@ -32,6 +33,7 @@ const Note = ({ close }) => {
 
     if (url) {
       window.URL.revokeObjectURL(url)
+      console.log(url)
     }
 
     setUrl(null)
@@ -47,7 +49,13 @@ const Note = ({ close }) => {
             onRecordingError={_onRecordingError}
             className="m-auto recorder"
           />
-          <input className="noteInput" type="text" placeholder="Not Adı" />
+          <input
+            value={name}
+            onChange={e => setName(e.target.value)}
+            className="noteInput"
+            type="text"
+            placeholder="Not Adı"
+          />
         </>
       ) : (
         <div />

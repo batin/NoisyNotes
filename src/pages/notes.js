@@ -10,8 +10,7 @@ import Note from "../components/note"
 const Section1 = () => {
   const [empty, setEmpty] = useState(false)
   const [popup, setPopup] = useState(false)
-  const [selected, setSelected] = useState([])
-  // not secilince selecteda setle sonra note elementini onunla ac
+  const [selected, setSelected] = useState(false)
   const notes = [
     {
       name: "note 1",
@@ -42,6 +41,7 @@ const Section1 = () => {
 
   const close = () => {
     setPopup(false)
+    setSelected(false)
   }
 
   return (
@@ -60,7 +60,7 @@ const Section1 = () => {
         {selected ? (
           <div className="d-flex popupContainer justify-content-center align-content-center">
             <div className="popup">
-              <Note close={close} />
+              <Note close={close} data={selected} />
             </div>
           </div>
         ) : (
@@ -84,7 +84,15 @@ const Section1 = () => {
             </div>
             <div className="d-flex flex-wrap justify-content-center align-items-center">
               {notes.map((note, key) => {
-                return <NoteItem data={note} key={key} />
+                return (
+                  <NoteItem
+                    data={note}
+                    key={key}
+                    open={() => {
+                      setSelected(note)
+                    }}
+                  />
+                )
               })}
             </div>
           </div>

@@ -1,6 +1,6 @@
 import React from "react"
-import GlobalContextProvider from "./src/services/auth"
+import { AuthProvider } from "./src/services/auth"
 
 export const wrapRootElement = ({ element }) => {
-  return <GlobalContextProvider>{element}</GlobalContextProvider>
+  return <AuthProvider>{element}</AuthProvider>
 }
