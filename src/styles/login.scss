@@ -44,6 +44,15 @@
   }
 }
 
+@media only screen and (max-width: 320px) {
+  .input {
+    height: 35px;
+  }
+  .button {
+    height: 35px;
+  }
+}
+
 .login {
   height: 100vh;
   background-color: $white;

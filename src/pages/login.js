@@ -1,12 +1,15 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
 import "../styles/index.scss"
 import { Link, navigate } from "gatsby"
+import { AuthContext } from "../services/auth"
+import axios from "axios"
 
 const LoginPage = () => {
+  const state = useContext(AuthContext)
   const [email, setEmail] = useState("")
   const [pass, setPass] = useState("")
   const data = useStaticQuery(graphql`
@@ -21,7 +24,19 @@ const LoginPage = () => {
     }
   `)
 
-  const login = () => {
+  const login = async () => {
+    // const bodyFormData = new FormData()
+    // await bodyFormData.set("username", email)
+    // await bodyFormData.set("password", pass)
+    // const login = await axios({
+    //   method: "POST",
+    //   url: "https://noisy-notes.herokuapp.com/login",
+    //   data: bodyFormData,
+    //   headers: {
+    //     "content-type": `multipart/form-data; boundary=${bodyFormData._boundary}`,
+    //   },
+    // })
+    // await console.log(login)
     navigate("/notes")
   }
 

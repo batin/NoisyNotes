@@ -6,11 +6,13 @@ import { FiPlus } from "react-icons/fi"
 import AddNotePopup from "../components/addNotePopup"
 import NoteItem from "../components/noteItem"
 import Note from "../components/note"
+import "../styles/index.scss"
 
 const Section1 = () => {
   const [empty, setEmpty] = useState(false)
   const [popup, setPopup] = useState(false)
   const [selected, setSelected] = useState(false)
+  // const state = useContext(AuthContext)
   const notes = [
     {
       name: "note 1",

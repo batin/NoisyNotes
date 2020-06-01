@@ -32,10 +32,29 @@
     }
   }
 }
+
+@media only screen and (max-width: 320px) {
+  .input {
+    height: 35px;
+  }
+  .button {
+    height: 35px;
+  }
+  .register {
+    h1 {
+      margin-bottom: 0px !important;
+    }
+  }
+}
+
 @media only screen and (max-width: 760px) {
   .register {
+    h1 {
+      font-size: 1.4rem;
+    }
     p {
       width: 75vw !important;
+      font-size: 12px;
     }
   }
 }

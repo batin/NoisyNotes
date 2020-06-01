@@ -1,12 +1,15 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
 import "../styles/index.scss"
 import { Link, navigate } from "gatsby"
+import { AuthContext } from "../services/auth"
+import axios from "axios"
 
 const LoginPage = () => {
+  const state = useContext(AuthContext)
   const [name, setName] = useState("")
   const [surname, setSurname] = useState("")
   const [email, setEmail] = useState("")
@@ -23,8 +26,19 @@ const LoginPage = () => {
     }
   `)
 
-  const register = () => {
-    navigate("/notes")
+  const register = async () => {
+    // const signup = await axios({
+    //   method: "post",
+    //   url: "https://noisy-notes.herokuapp.com/signup",
+    //   data: {
+    //     username: email,
+    //     password: pass,
+    //     name: name,
+    //     surname: surname,
+    //   },
+    // })
+    // await console.log(signup)
+    await navigate("/notes")
   }
 
   return (
@@ -39,7 +53,7 @@ const LoginPage = () => {
               fluid={data.headerImg.childImageSharp.fluid}
             />
           </Link>
-          <h1 className="mt-5 mb-5">Hadi Başlayalım!</h1>
+          <h1 className="mt-3 mb-3">Hadi Başlayalım!</h1>
           <div className="mb-3 mt-5">
             <input
               type="text"
