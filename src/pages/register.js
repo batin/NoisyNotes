@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { graphql, useStaticQuery } from "gatsby"
@@ -10,6 +10,11 @@ import axios from "axios"
 
 const LoginPage = () => {
   const state = useContext(AuthContext)
+  useEffect(() => {
+    if (state.user) {
+      navigate("/notes/")
+    }
+  })
   const [name, setName] = useState("")
   const [surname, setSurname] = useState("")
   const [email, setEmail] = useState("")
@@ -27,18 +32,39 @@ const LoginPage = () => {
   `)
 
   const register = async () => {
-    // const signup = await axios({
-    //   method: "post",
-    //   url: "https://noisy-notes.herokuapp.com/signup",
-    //   data: {
-    //     username: email,
-    //     password: pass,
-    //     name: name,
-    //     surname: surname,
-    //   },
-    // })
-    // await console.log(signup)
-    await navigate("/notes")
+    const formdata = new FormData()
+    formdata.append("username", email)
+    formdata.append("password", pass)
+    formdata.append("name", name)
+    formdata.append("surname", surname)
+    const signup = await axios({
+      method: "POST",
+      url: "https://noisy-notes.herokuapp.com/signup",
+      data: formdata,
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    })
+    const formdata2 = new FormData()
+    formdata2.append("username", email)
+    formdata2.append("password", pass)
+    const login = await axios({
+      method: "POST",
+      url: "https://noisy-notes.herokuapp.com/login",
+      data: formdata2,
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    })
+    const me = await axios({
+      method: "GET",
+      url: "https://noisy-notes.herokuapp.com/user/me",
+      headers: { Authorization: `Bearer ${login.data.Token}` },
+    })
+
+    await state.login(me.data, login.data.Token)
+    await state.setUser(signup.data.User)
+    await navigate("/notes/")
   }
 
   return (
@@ -46,7 +72,7 @@ const LoginPage = () => {
       <Seo title="Register" />
       <section className="register">
         <div className="container d-flex flex-column justify-content-center align-items-center content">
-          <Link>
+          <Link to="/">
             <Img
               className="logo"
               loading="lazy"
@@ -107,7 +133,7 @@ const LoginPage = () => {
         <div className="d-flex justify-content-center align-items-center footer">
           <h5>
             Hesabın var mı?
-            <Link to="/login"> Giriş Yap </Link>
+            <Link to="/login/"> Giriş Yap </Link>
           </h5>
         </div>
       </section>

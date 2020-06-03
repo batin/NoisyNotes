@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import emptyState from "../images/empty.svg"
@@ -7,12 +7,19 @@ import AddNotePopup from "../components/addNotePopup"
 import NoteItem from "../components/noteItem"
 import Note from "../components/note"
 import "../styles/index.scss"
+import { AuthContext } from "../services/auth"
+import { navigate } from "gatsby"
 
 const Section1 = () => {
   const [empty, setEmpty] = useState(false)
   const [popup, setPopup] = useState(false)
   const [selected, setSelected] = useState(false)
-  // const state = useContext(AuthContext)
+  const state = useContext(AuthContext)
+  useEffect(() => {
+    if (!state.user) {
+      navigate("/")
+    }
+  }, [])
   const notes = [
     {
       name: "note 1",

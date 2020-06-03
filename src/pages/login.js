@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { graphql, useStaticQuery } from "gatsby"
@@ -10,6 +10,12 @@ import axios from "axios"
 
 const LoginPage = () => {
   const state = useContext(AuthContext)
+  useEffect(() => {
+    if (state.user) {
+      navigate("/notes/")
+    }
+  }, [])
+
   const [email, setEmail] = useState("")
   const [pass, setPass] = useState("")
   const data = useStaticQuery(graphql`
@@ -25,19 +31,25 @@ const LoginPage = () => {
   `)
 
   const login = async () => {
-    // const bodyFormData = new FormData()
-    // await bodyFormData.set("username", email)
-    // await bodyFormData.set("password", pass)
-    // const login = await axios({
-    //   method: "POST",
-    //   url: "https://noisy-notes.herokuapp.com/login",
-    //   data: bodyFormData,
-    //   headers: {
-    //     "content-type": `multipart/form-data; boundary=${bodyFormData._boundary}`,
-    //   },
-    // })
-    // await console.log(login)
-    navigate("/notes")
+    const formdata = new FormData()
+    formdata.append("username", email)
+    formdata.append("password", pass)
+    const login = await axios({
+      method: "POST",
+      url: "https://noisy-notes.herokuapp.com/login",
+      data: formdata,
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    })
+    const me = await axios({
+      method: "GET",
+      url: "https://noisy-notes.herokuapp.com/user/me",
+      headers: { Authorization: `Bearer ${login.data.Token}` },
+    })
+
+    await state.login(me.data, login.data.Token)
+    await navigate("/notes/")
   }
 
   return (
@@ -45,7 +57,7 @@ const LoginPage = () => {
       <Seo title="Login" />
       <section className="login">
         <div className="container d-flex flex-column justify-content-center align-items-center content">
-          <Link>
+          <Link to="/">
             <Img
               className="logo"
               loading="lazy"
@@ -82,7 +94,7 @@ const LoginPage = () => {
         <div className="d-flex justify-content-center align-items-center footer">
           <h5>
             Hesabın yok mu?
-            <Link to="/register"> Üye Ol</Link>
+            <Link to="/register/"> Üye Ol</Link>
           </h5>
         </div>
       </section>

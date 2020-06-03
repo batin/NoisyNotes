@@ -1,8 +1,16 @@
 import React, { useReducer, createContext } from "react"
 
+const isBrowser = () => typeof window !== "undefined"
+
+const getUser = () =>
+  isBrowser() && window.localStorage.getItem("user")
+    ? JSON.parse(window.localStorage.getItem("user"))
+    : null
+
 const initialState = {
-  user: null,
+  user: getUser(),
   notes: [],
+  token: localStorage.getItem("TOKEN"),
 }
 
 const AuthContext = createContext({
@@ -20,6 +28,11 @@ function authReducer(state, action) {
     case "setUser": {
       return {
         user: action.payload,
+      }
+    }
+    case "setToken": {
+      return {
+        token: action.payload,
       }
     }
     case "addNote": {
@@ -44,6 +57,16 @@ function authReducer(state, action) {
         }),
       }
     }
+    case "login":
+      return {
+        ...state,
+        user: action.payload,
+      }
+    case "logout":
+      return {
+        ...state,
+        user: null,
+      }
     default: {
       return state
     }
@@ -52,9 +75,31 @@ function authReducer(state, action) {
 
 function AuthProvider(props) {
   const [state, dispatch] = useReducer(authReducer, initialState)
+  function login(userData, token) {
+    localStorage.setItem("TOKEN", token)
+    localStorage.setItem("user", JSON.stringify(userData))
+    dispatch({
+      type: "login",
+      payload: userData,
+    })
+    console.log("login basarili")
+  }
+
+  function logout() {
+    localStorage.removeItem("TOKEN")
+    localStorage.removeItem("user")
+    dispatch({ type: "logout" })
+    console.log("logout basarili")
+  }
   function setUser(data) {
     dispatch({
       type: "setUser",
+      payload: data,
+    })
+  }
+  function setToken(data) {
+    dispatch({
+      type: "setToken",
       payload: data,
     })
   }
@@ -87,11 +132,15 @@ function AuthProvider(props) {
       value={{
         user: state.user,
         setUser,
+        setToken,
+        token: state.token,
         notes: state.notes,
         addNote,
         setNotes,
         updateNote,
         deleteNote,
+        login,
+        logout,
       }}
       {...props}
     />

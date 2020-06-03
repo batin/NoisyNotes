@@ -32,12 +32,11 @@ const Header = () => {
         loading="lazy"
         fluid={data.headerImg.childImageSharp.fluid}
       />
-
-      {state.user ? (
+      {!state.user ? (
         <div className="d-flex buttons">
           <button
             onClick={() => {
-              navigate("/login")
+              navigate("/login/")
             }}
             className="btn btn-1"
           >
@@ -45,7 +44,7 @@ const Header = () => {
           </button>
           <button
             onClick={() => {
-              navigate("/register")
+              navigate("/register/")
             }}
             className="btn btn-2"
           >
@@ -53,12 +52,19 @@ const Header = () => {
           </button>
         </div>
       ) : (
-        <div className="d-flex navigators">
-          <Link to="/notes" className={path === "/notes" ? "active" : ""}>
+        <nav className="d-flex navigators align-items-center text-center justify-content-center">
+          <Link to="/notes/" className={path === "/notes/" ? "active" : ""}>
             Notlarım
           </Link>
-          <Link to="/">Çıkış Yap</Link>
-        </div>
+          <a
+            onClick={() => {
+              state.logout()
+              navigate("/")
+            }}
+          >
+            Çıkış Yap
+          </a>
+        </nav>
       )}
     </header>
   )

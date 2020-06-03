@@ -15,7 +15,8 @@
   }
   .navigators {
     margin-right: 20px;
-    a {
+    a,
+    p {
       font-weight: bold;
       font-size: 16px;
       line-height: 22px;
@@ -23,6 +24,9 @@
       color: $secondary;
       cursor: pointer;
       text-decoration: none;
+    }
+    p {
+      margin-top: unset !important;
     }
     .active {
       color: $third !important;
@@ -33,7 +37,7 @@
 
     .btn-1 {
       width: 100px;
-      height: 30px;
+      // height: 30px;
       text-transform: capitalize;
       align-self: center;
       background-color: $white;
@@ -49,7 +53,7 @@
     }
     .btn-2 {
       width: 100px;
-      height: 30px;
+      // height: 30px;
       text-transform: capitalize;
       align-self: center;
       color: $white;
