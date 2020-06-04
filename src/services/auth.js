@@ -1,5 +1,4 @@
 import React, { useReducer, createContext } from "react"
-
 const isBrowser = () => typeof window !== "undefined"
 
 const getUser = () =>
@@ -10,7 +9,7 @@ const getUser = () =>
 const initialState = {
   user: getUser(),
   notes: [],
-  token: localStorage.getItem("TOKEN"),
+  token: isBrowser() ? localStorage.getItem("TOKEN") : null,
 }
 
 const AuthContext = createContext({
@@ -21,6 +20,8 @@ const AuthContext = createContext({
   addNote: data => {},
   deleteNote: data => {},
   updateNote: data => {},
+  login: (userData, token) => {},
+  logout: () => {},
 })
 
 function authReducer(state, action) {
