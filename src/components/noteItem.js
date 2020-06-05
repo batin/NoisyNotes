@@ -7,9 +7,13 @@ const NoteItem = ({ data, open }) => {
       onClick={open}
       className="d-flex flex-column align-content-center justify-content-center align-items-center noteItem m-5"
     >
-      <h1>{data.name}</h1>
+      <h1>{data.Title}</h1>
       <FaPlay size={80} className="my-3" />
-      {data.tags.join(", ")}
+      <div className="d-flex">
+        {data.Tags.map((tag, key) => {
+          return <p key={key}>{tag.Title},</p>
+        })}
+      </div>
     </div>
   )
 }

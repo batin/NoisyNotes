@@ -19,7 +19,6 @@
     "gatsby-plugin-sharp": "^2.6.9",
     "gatsby-source-filesystem": "^2.3.8",
     "gatsby-transformer-sharp": "^2.5.3",
-    "jwt-decode": "^2.2.0",
     "node-sass": "^4.14.1",
     "peerjs": "^1.2.0",
     "prop-types": "^15.7.2",
@@ -29,7 +28,9 @@
     "react-dom": "^16.13.1",
     "react-helmet": "^5.2.1",
     "react-icons": "^3.10.0",
+    "react-mp3-player": "^0.8.2",
     "react-mp3-recorder": "^1.1.2",
+    "react-tagsinput": "^3.19.0",
     "request": "^2.88.2",
     "stylelint": "^13.5.0",
     "stylelint-config-sass-guidelines": "^7.0.0"

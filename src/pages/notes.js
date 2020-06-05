@@ -9,44 +9,50 @@ import Note from "../components/note"
 import "../styles/index.scss"
 import { AuthContext } from "../services/auth"
 import { navigate } from "gatsby"
+import axios from "axios"
 
-const Section1 = () => {
-  const [empty, setEmpty] = useState(false)
+const Notes = () => {
+  const state = useContext(AuthContext)
+  const [noises, setNoises] = useState(null)
   const [popup, setPopup] = useState(false)
   const [selected, setSelected] = useState(false)
-  const state = useContext(AuthContext)
   useEffect(() => {
+    fetchNoises()
     if (!state.user) {
       navigate("/")
     }
   }, [])
-  const notes = [
-    {
-      name: "note 1",
-      url: "url",
-      tags: ["#fizik", "#uni", "#school"],
-    },
-    {
-      name: "note 2",
-      url: "url2",
-      tags: ["#javascript", "#jsx", "#react"],
-    },
-    {
-      name: "note 3",
-      url: "url3",
-      tags: ["#javascript", "#jsx", "#react"],
-    },
-    {
-      name: "note 4",
-      url: "url4",
-      tags: ["#javascript", "#jsx", "#react"],
-    },
-    {
-      name: "note 5",
-      url: "url5",
-      tags: ["#javascript", "#jsx", "#react"],
-    },
-  ]
+
+  const renderNoises = () => {
+    return noises.map((note, key) => {
+      return (
+        <NoteItem
+          data={note}
+          key={key}
+          open={() => {
+            setSelected(note)
+          }}
+        />
+      )
+    })
+  }
+
+  const fetchNoises = async () => {
+    try {
+      console.log(state.token)
+      const saved = await axios({
+        method: "GET",
+        url: "https://noisy-notes.herokuapp.com/user/noises",
+        headers: {
+          Authorization: `Bearer ${state.token}`,
+        },
+      })
+      await state.setNoises(saved.data)
+      await setNoises(saved.data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   const close = () => {
     setPopup(false)
@@ -75,15 +81,7 @@ const Section1 = () => {
         ) : (
           <div />
         )}
-        {empty ? (
-          <div className="d-flex flex-column justify-content-center align-items-center emptyState">
-            <img src={emptyState} alt="" srcset="" />
-            <h1 className="empty">Burada hiç kayıtlı not yok :( </h1>
-            <button onClick={() => setPopup(true)} className="btn button">
-              <FiPlus size={20} className="plus" /> <span> Yeni Not</span>
-            </button>
-          </div>
-        ) : (
+        {noises && noises.length > 0 ? (
           <div className="d-flex flex-column justify-content-center align-items-center normalState">
             <div className="searchBar d-flex flex-wrap justify-content-between align-items-center">
               <input type="text" placeholder="Notlarda Ara..." />
@@ -91,19 +89,21 @@ const Section1 = () => {
                 <FiPlus size={15} className="plus" /> <span> Yeni Not</span>
               </button>
             </div>
-            <div className="d-flex flex-wrap justify-content-center align-items-center">
-              {notes.map((note, key) => {
-                return (
-                  <NoteItem
-                    data={note}
-                    key={key}
-                    open={() => {
-                      setSelected(note)
-                    }}
-                  />
-                )
-              })}
-            </div>
+            {state.user && noises ? (
+              <div className="d-flex flex-wrap justify-content-center align-items-center">
+                {renderNoises()}
+              </div>
+            ) : (
+              <div />
+            )}
+          </div>
+        ) : (
+          <div className="d-flex flex-column justify-content-center align-items-center emptyState">
+            <img src={emptyState} alt="" />
+            <h1 className="empty">Burada hiç kayıtlı not yok :( </h1>
+            <button onClick={() => setPopup(true)} className="btn button">
+              <FiPlus size={20} className="plus" /> <span> Yeni Not</span>
+            </button>
           </div>
         )}
       </section>
@@ -111,4 +111,4 @@ const Section1 = () => {
   )
 }
 
-export default Section1
+export default Notes

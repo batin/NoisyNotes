@@ -29,10 +29,33 @@
     height: 30px;
     margin-top: 30px !important;
     margin-bottom: 30px !important;
+    width: 80%;
     &:focus {
       outline: none;
     }
   }
+
+  .tagInput {
+    border: 2px solid $fourth;
+    min-height: 50px;
+    margin-top: 30px !important;
+    margin-bottom: 30px !important;
+    border-radius: 5px;
+    width: 80%;
+    .react-tagsinput-tag {
+      margin: auto;
+      padding: 0;
+      background-color: $third;
+      color: white;
+      font-family: $font;
+      border: none;
+      border-radius: 5px;
+      height: 25px;
+      margin: 5px;
+      padding: 4px;
+    }
+  }
+
   .recorder {
     div {
       background: $third;

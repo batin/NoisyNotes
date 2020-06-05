@@ -8,14 +8,13 @@ const getUser = () =>
 
 const initialState = {
   user: getUser(),
-  notes: [],
   token: isBrowser() ? localStorage.getItem("TOKEN") : null,
 }
 
 const AuthContext = createContext({
   user: null,
-  notes: [],
-  setNotes: data => {},
+  token: null,
+  setNoises: data => {},
   setUser: data => {},
   addNote: data => {},
   deleteNote: data => {},
@@ -28,34 +27,52 @@ function authReducer(state, action) {
   switch (action.type) {
     case "setUser": {
       return {
+        ...state,
         user: action.payload,
       }
     }
     case "setToken": {
       return {
+        ...state,
         token: action.payload,
       }
     }
     case "addNote": {
       return {
-        notes: [action.payload, ...state.notes],
+        ...state,
+        user: {
+          ...state.user,
+          Noises: [action.payload, ...state.notes],
+        },
       }
     }
-    case "setNotes": {
+    case "setNoises": {
       return {
-        notes: action.payload,
+        ...state,
+        user: {
+          ...state.user,
+          Noises: action.payload,
+        },
       }
     }
     case "deleteNote": {
       return {
-        notes: state.notes.filter(note => note.id !== action.payload),
+        ...state,
+        user: {
+          ...state.user,
+          Noises: state.notes.filter(note => note.id !== action.payload),
+        },
       }
     }
     case "updateNote": {
       return {
-        notes: state.notes.forEach(note => {
-          if (note.id === action.payload.id) note = action.payload // might need an update
-        }),
+        ...state,
+        user: {
+          ...state.user,
+          Noises: state.notes.forEach(note => {
+            if (note.id === action.payload.id) note = action.payload // might need an update
+          }),
+        },
       }
     }
     case "login":
@@ -77,19 +94,19 @@ function authReducer(state, action) {
 function AuthProvider(props) {
   const [state, dispatch] = useReducer(authReducer, initialState)
   function login(userData, token) {
-    localStorage.setItem("TOKEN", token)
-    localStorage.setItem("user", JSON.stringify(userData))
     dispatch({
       type: "login",
       payload: userData,
     })
+    localStorage.setItem("TOKEN", token)
+    localStorage.setItem("user", JSON.stringify(userData))
     console.log("login basarili")
   }
 
   function logout() {
+    dispatch({ type: "logout" })
     localStorage.removeItem("TOKEN")
     localStorage.removeItem("user")
-    dispatch({ type: "logout" })
     console.log("logout basarili")
   }
   function setUser(data) {
@@ -110,9 +127,13 @@ function AuthProvider(props) {
       payload: data,
     })
   }
-  function setNotes(data) {
+  function setNoises(data) {
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ ...state.user, Noises: data })
+    )
     dispatch({
-      type: "setNotes",
+      type: "setNoises",
       payload: data,
     })
   }
@@ -137,7 +158,7 @@ function AuthProvider(props) {
         token: state.token,
         notes: state.notes,
         addNote,
-        setNotes,
+        setNoises,
         updateNote,
         deleteNote,
         login,
