@@ -18,10 +18,7 @@ const Notes = () => {
   const [selected, setSelected] = useState(false)
   useEffect(() => {
     fetchNoises()
-    if (!state.user) {
-      navigate("/")
-    }
-  }, [])
+  }, [popup, selected])
 
   const renderNoises = () => {
     return noises.map((note, key) => {
@@ -39,7 +36,7 @@ const Notes = () => {
 
   const fetchNoises = async () => {
     try {
-      console.log(state.token)
+      if (!state.token) navigate("/")
       const saved = await axios({
         method: "GET",
         url: "https://noisy-notes.herokuapp.com/user/noises",
@@ -47,8 +44,8 @@ const Notes = () => {
           Authorization: `Bearer ${state.token}`,
         },
       })
-      await state.setNoises(saved.data)
       await setNoises(saved.data)
+      await state.setNoises(saved.data)
     } catch (err) {
       console.log(err)
     }

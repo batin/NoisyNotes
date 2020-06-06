@@ -2,7 +2,7 @@ import React from "react"
 import Img from "gatsby-image"
 import { graphql, useStaticQuery } from "gatsby"
 
-const Section4 = () => {
+const Footer = () => {
   const data = useStaticQuery(graphql`
     {
       s1Img: file(relativePath: { eq: "logo_light.png" }) {
@@ -39,4 +39,4 @@ const Section4 = () => {
   )
 }
 
-export default Section4
+export default Footer

@@ -4,7 +4,7 @@ import Seo from "../components/seo"
 import Section1 from "../components/homeS1"
 import Section2 from "../components/homeS2"
 import Section3 from "../components/homeS3"
-import Section4 from "../components/homeS4"
+import Footer from "../components/Footer"
 import "../styles/index.scss"
 
 const IndexPage = () => {
@@ -14,7 +14,7 @@ const IndexPage = () => {
       <Section1 />
       <Section2 />
       <Section3 />
-      <Section4 />
+      <Footer />
     </Layout>
   )
 }

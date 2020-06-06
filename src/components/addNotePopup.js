@@ -1,89 +1,73 @@
-import React, { useState, useContext } from "react"
-import Recorder from "react-mp3-recorder"
+import React, { useState, useContext, useEffect } from "react"
+// import Recorder from "react-mp3-recorder"
 import ReactAudioPlayer from "react-audio-player"
-import blobToBuffer from "blob-to-buffer"
-import { IoIosCloseCircle } from "react-icons/io"
+// import blobToBuffer from "blob-to-buffer"
+import { IoIosCloseCircle, IoMdMic } from "react-icons/io"
+import { BsStopFill } from "react-icons/bs"
 import { AuthContext } from "../services/auth"
-import axios from "axios"
 import TagsInput from "react-tagsinput"
 import "react-tagsinput/react-tagsinput.css"
-import mp3 from "../images/2.mp3"
-
+import Microm from "microm"
+import axios from "axios"
 const AddNotePopup = ({ close }) => {
   const state = useContext(AuthContext)
   const [url, setUrl] = useState("")
   const [mp3file, setMp3file] = useState(null)
   const [title, setTitle] = useState("")
+  const [recording, setRecording] = useState(false)
   const [tags, setTags] = useState([])
+
+  useEffect(() => {
+    window.microm = new Microm()
+  }, [])
+
+  useEffect(() => {
+    console.log(tags)
+  }, [tags])
   const save = async () => {
     const formdata = new FormData()
     formdata.append("title", title)
     formdata.append("tags", tags.join(", "))
     formdata.append("file", mp3file)
-    // try {
-    //   const saved = await axios({
-    //     method: "POST",
-    //     url: "https://noisy-notes.herokuapp.com/user/noises",
-    //     headers: {
-    //       Authorization: `Bearer ${state.token}`,
-    //       "Content-Type": `multipart/form-data; boundary=${formdata._boundary}`,
-    //     },
-    //     data: formdata,
-    //   })
-    //   console.log(saved)
-    // } catch (err) {
-    //   console.log(err)
-    // }
-    var myHeaders = new Headers()
-    myHeaders.append("Authorization", `Bearer ${state.token}`)
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: formdata,
-      redirect: "follow",
-    }
-
-    fetch("https://noisy-notes.herokuapp.com/user/noises", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log("error", error))
-  }
-
-  const _onRecordingComplete = blob => {
-    blobToBuffer(blob, (err, buffer) => {
-      if (err) {
-        console.error(err)
-        return
-      }
-      const file = new File(buffer, "deneme.mp3", {
-        type: blob.type,
-        lastModified: Date.now(),
+    try {
+      await axios({
+        method: "POST",
+        url: "https://noisy-notes.herokuapp.com/user/noises",
+        headers: {
+          Authorization: `Bearer ${state.token}`,
+        },
+        data: formdata,
       })
-      setMp3file(blob)
-      console.log(file)
-      if (url) {
-        window.URL.revokeObjectURL(url)
-      }
-      setUrl(window.URL.createObjectURL(blob))
-    })
+    } catch (err) {
+      console.log(err)
+    }
   }
 
-  const _onRecordingError = err => {
-    console.log("error recording", err)
-    if (url) {
-      window.URL.revokeObjectURL(url)
-    }
-    setUrl(null)
+  const start = () => {
+    window.microm.record().then(() => setRecording(true))
+  }
+
+  const stop = () => {
+    setRecording(false)
+    window.microm.stop().then(function(result) {
+      const mp3 = result
+      setMp3file(new Blob(mp3.buffer, { type: "audio/mpeg" }))
+      setUrl(mp3.url)
+    })
   }
 
   return (
     <div className="d-flex flex-column align-content-center justify-content-center align-items-center addNotePopup">
       <IoIosCloseCircle className="closeBtn" size={25} onClick={close} />
-      <Recorder
-        onRecordingComplete={_onRecordingComplete}
-        onRecordingError={_onRecordingError}
-        className="m-auto recorder"
-      />
+      {recording ? (
+        <div onClick={() => stop()} className="m-auto recorder">
+          <BsStopFill size={20} />
+        </div>
+      ) : (
+        <div onClick={() => start()} className="m-auto recorder">
+          <IoMdMic size={20} />
+        </div>
+      )}
       {url && (
         <>
           <input
