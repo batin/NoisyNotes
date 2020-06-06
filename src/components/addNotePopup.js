@@ -1,14 +1,12 @@
 import React, { useState, useContext, useEffect } from "react"
-// import Recorder from "react-mp3-recorder"
 import ReactAudioPlayer from "react-audio-player"
-// import blobToBuffer from "blob-to-buffer"
 import { IoIosCloseCircle, IoMdMic } from "react-icons/io"
 import { BsStopFill } from "react-icons/bs"
 import { AuthContext } from "../services/auth"
 import TagsInput from "react-tagsinput"
 import "react-tagsinput/react-tagsinput.css"
-// import Microm from "microm"
 import axios from "axios"
+
 const AddNotePopup = ({ close }) => {
   const state = useContext(AuthContext)
   const [url, setUrl] = useState("")
@@ -22,9 +20,6 @@ const AddNotePopup = ({ close }) => {
     window.microm = new Microm()
   }, [])
 
-  useEffect(() => {
-    console.log(tags)
-  }, [tags])
   const save = async () => {
     const formdata = new FormData()
     formdata.append("title", title)
@@ -42,6 +37,7 @@ const AddNotePopup = ({ close }) => {
     } catch (err) {
       console.log(err)
     }
+    close()
   }
 
   const start = () => {
@@ -61,7 +57,7 @@ const AddNotePopup = ({ close }) => {
     <div className="d-flex flex-column align-content-center justify-content-center align-items-center addNotePopup">
       <IoIosCloseCircle className="closeBtn" size={25} onClick={close} />
       {recording ? (
-        <div onClick={() => stop()} className="m-auto recorder">
+        <div onClick={() => stop()} className="m-auto recorder recording">
           <BsStopFill size={20} />
         </div>
       ) : (

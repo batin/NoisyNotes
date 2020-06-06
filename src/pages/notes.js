@@ -36,16 +36,19 @@ const Notes = () => {
 
   const fetchNoises = async () => {
     try {
-      if (!state.token) navigate("/")
-      const saved = await axios({
-        method: "GET",
-        url: "https://noisy-notes.herokuapp.com/user/noises",
-        headers: {
-          Authorization: `Bearer ${state.token}`,
-        },
-      })
-      await setNoises(saved.data)
-      await state.setNoises(saved.data)
+      if (!state.token) {
+        navigate("/")
+      } else {
+        const saved = await axios({
+          method: "GET",
+          url: "https://noisy-notes.herokuapp.com/user/noises",
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        })
+        await setNoises(saved.data)
+        await state.setNoises(saved.data)
+      }
     } catch (err) {
       console.log(err)
     }

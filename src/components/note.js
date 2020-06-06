@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react"
 import ReactAudioPlayer from "react-audio-player"
-
 import { AiFillDelete } from "react-icons/ai"
 import { IoIosCloseCircle, IoMdMic } from "react-icons/io"
 import { BsStopFill } from "react-icons/bs"
@@ -16,7 +15,6 @@ const Note = ({ close, data }) => {
   const [name, setName] = useState(data.Title)
   const [recording, setRecording] = useState(false)
   const [tags, setTags] = useState([])
-
   const state = useContext(AuthContext)
 
   useEffect(() => {
@@ -74,11 +72,11 @@ const Note = ({ close, data }) => {
       {edit ? (
         <>
           {recording ? (
-            <div onClick={() => stop()} className="m-auto recorder">
+            <div onClick={() => stop()} className="m-auto recorder recording">
               <BsStopFill size={20} />
             </div>
           ) : (
-            <div onClick={() => start()} className="m-auto recorder">
+            <div onClick={() => start()} className="m-auto recorder ">
               <IoMdMic size={20} />
             </div>
           )}
@@ -100,6 +98,8 @@ const Note = ({ close, data }) => {
       )}
       <div className="player">
         <ReactAudioPlayer src={url} controls />
+        <br />
+        {"Is Active: " + data.IsActive}
         {/* <audio src={url} controls /> */}
       </div>
       {edit ? (

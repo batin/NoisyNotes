@@ -55,7 +55,21 @@
       padding: 4px;
     }
   }
+  @keyframes changeScale {
+    from {
+      transform: scale(0.8);
+    }
 
+    to {
+      transform: scale(1);
+    }
+  }
+  .recording {
+    animation-duration: 0.7s;
+    animation-name: changeScale;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
   .recorder {
     color: $white;
     background: $third;
