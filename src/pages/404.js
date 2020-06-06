@@ -1,6 +1,5 @@
 import React from "react"
-import logo from "../images/logo_light.svg"
-import Footer from "../components/Footer"
+import Footer from "../components/footer"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import "../styles/index.scss"

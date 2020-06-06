@@ -4,7 +4,7 @@ import Seo from "../components/seo"
 import Section1 from "../components/homeS1"
 import Section2 from "../components/homeS2"
 import Section3 from "../components/homeS3"
-import Footer from "../components/Footer"
+import Footer from "../components/footer"
 import "../styles/index.scss"
 
 const IndexPage = () => {
