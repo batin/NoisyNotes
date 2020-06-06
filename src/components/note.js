@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react"
 import ReactAudioPlayer from "react-audio-player"
-import Microm from "microm"
+
 import { AiFillDelete } from "react-icons/ai"
 import { IoIosCloseCircle, IoMdMic } from "react-icons/io"
 import { BsStopFill } from "react-icons/bs"
@@ -20,13 +20,14 @@ const Note = ({ close, data }) => {
   const state = useContext(AuthContext)
 
   useEffect(() => {
+    const Microm = require("microm")
     setTags(
       data.Tags.map(tag => {
         return tag.Title
       })
     )
     getNoise()
-    window.microm = new Microm()
+    if (window) window.microm = new Microm()
   }, [])
 
   const getNoise = async () => {
@@ -60,10 +61,11 @@ const Note = ({ close, data }) => {
 
   const stop = () => {
     setRecording(false)
-    window.microm.stop().then(function(result) {
-      const mp3 = result
-      setUrl(mp3.url)
-    })
+    if (window)
+      window.microm.stop().then(function(result) {
+        const mp3 = result
+        setUrl(mp3.url)
+      })
   }
 
   return (

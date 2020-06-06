@@ -7,7 +7,7 @@ import { BsStopFill } from "react-icons/bs"
 import { AuthContext } from "../services/auth"
 import TagsInput from "react-tagsinput"
 import "react-tagsinput/react-tagsinput.css"
-import Microm from "microm"
+// import Microm from "microm"
 import axios from "axios"
 const AddNotePopup = ({ close }) => {
   const state = useContext(AuthContext)
@@ -18,6 +18,7 @@ const AddNotePopup = ({ close }) => {
   const [tags, setTags] = useState([])
 
   useEffect(() => {
+    const Microm = require("microm")
     window.microm = new Microm()
   }, [])
 
