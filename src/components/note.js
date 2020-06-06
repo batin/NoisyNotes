@@ -100,7 +100,8 @@ const Note = ({ close, data }) => {
         <ReactAudioPlayer src={url} controls />
         <br />
         {"Is Active: " + data.IsActive}
-        {/* <audio src={url} controls /> */}
+        <br />
+        {data.IsActive ? data.Text : ""}
       </div>
       {edit ? (
         <button
