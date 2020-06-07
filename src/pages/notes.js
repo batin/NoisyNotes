@@ -16,6 +16,12 @@ const Notes = () => {
   const [noises, setNoises] = useState(null)
   const [popup, setPopup] = useState(false)
   const [selected, setSelected] = useState(false)
+
+  useEffect(() => {
+    // window.document.cookie = { name: "hello", value: "world", "max-age": 3600 }
+    fetchNoises()
+  }, [])
+
   useEffect(() => {
     fetchNoises()
   }, [popup, selected])

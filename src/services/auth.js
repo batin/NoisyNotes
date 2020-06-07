@@ -75,6 +75,7 @@ function authReducer(state, action) {
         },
       }
     }
+
     case "login":
       return {
         ...state,
@@ -84,6 +85,7 @@ function authReducer(state, action) {
       return {
         ...state,
         user: null,
+        token: null,
       }
     default: {
       return state
@@ -97,6 +99,10 @@ function AuthProvider(props) {
     dispatch({
       type: "login",
       payload: userData,
+    })
+    dispatch({
+      type: "setToken",
+      payload: token,
     })
     localStorage.setItem("TOKEN", token)
     localStorage.setItem("user", JSON.stringify(userData))
