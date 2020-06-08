@@ -1,10 +1,12 @@
 import React, { useReducer, createContext } from "react"
+
 const isBrowser = () => typeof window !== "undefined"
 
 const getUser = () =>
   isBrowser() && window.localStorage.getItem("user")
     ? JSON.parse(window.localStorage.getItem("user"))
     : null
+
 const getToken = () => {
   return isBrowser() && document.cookie !== ""
     ? document.cookie.split("=")[1]
@@ -108,14 +110,14 @@ function AuthProvider(props) {
       type: "setToken",
       payload: token,
     })
-    // localStorage.setItem("TOKEN", token)
-    document.cookie = `TOKEN=${token}; expires=3600;`
+    const now = new Date()
+    now.setTime(now.getTime() + 1 * 3600 * 1000)
+    document.cookie = `TOKEN=${token}; expires=${now};`
     localStorage.setItem("user", JSON.stringify(userData))
   }
 
   function logout() {
     dispatch({ type: "logout" })
-    // localStorage.removeItem("TOKEN")
     document.cookie = "TOKEN=;"
     localStorage.removeItem("user")
   }

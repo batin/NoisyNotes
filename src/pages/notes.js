@@ -98,7 +98,8 @@ const Notes = () => {
                 placeholder="Notlarda Ara..."
               />
               <button onClick={() => setPopup(true)} className="btn">
-                <FiPlus size={15} className="plus" /> <span> Yeni Not</span>
+                <FiPlus size={15} className="plus" strokeWidth="3" />
+                <span> Yeni Not</span>
               </button>
             </div>
             {state.user && noises ? (

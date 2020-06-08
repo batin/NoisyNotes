@@ -90,7 +90,8 @@
       width: 100px;
       font-size: 12px;
       height: 30px;
-      font-weight: 500;
+      font-weight: 600;
+      letter-spacing: 0.3px;
       text-transform: capitalize;
       align-self: center;
       background-color: $third;
@@ -99,6 +100,7 @@
       margin-right: 15px;
       .plus {
         margin-right: 5px;
+        margin-bottom: 2px;
       }
     }
   }
