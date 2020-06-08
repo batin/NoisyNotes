@@ -14,7 +14,9 @@ const Note = ({ close, data }) => {
   const [url, setUrl] = useState(null)
   const [name, setName] = useState(data.Title)
   const [recording, setRecording] = useState(false)
+  const [mp3file, setMp3file] = useState(null)
   const [tags, setTags] = useState([])
+  const [oldMp3File, setOldMp3File] = useState(null)
   const state = useContext(AuthContext)
 
   useEffect(() => {
@@ -39,9 +41,10 @@ const Note = ({ close, data }) => {
         },
         responseType: "blob",
       })
-      var blob = new Blob([saved.data], {
+      const blob = new Blob([saved.data], {
         type: "audio/mpeg",
       })
+      await setOldMp3File(blob)
       var reader = new FileReader()
       reader.readAsDataURL(blob)
       reader.onloadend = function() {
@@ -53,6 +56,42 @@ const Note = ({ close, data }) => {
     }
   }
 
+  const deleteNote = async () => {
+    await axios({
+      method: "DELETE",
+      url: `https://noisy-notes.herokuapp.com/user/noises/${data.ID}`,
+      headers: {
+        Authorization: `Bearer ${state.token}`,
+      },
+    })
+    close()
+  }
+
+  const save = async () => {
+    try {
+      const formdata = new FormData()
+      formdata.append("title", name)
+      formdata.append("tags", tags.join(", "))
+      if (mp3file) {
+        formdata.append("file", mp3file)
+      } else {
+        formdata.append("file", oldMp3File)
+      }
+      const saved = await axios({
+        method: "PUT",
+        url: `https://noisy-notes.herokuapp.com/user/noises/${data.ID}`,
+        headers: {
+          Authorization: `Bearer ${state.token}`,
+        },
+        data: formdata,
+      })
+      console.log(saved)
+    } catch (err) {
+      console.log(err)
+    }
+    close()
+  }
+
   const start = () => {
     window.microm.record().then(() => setRecording(true))
   }
@@ -62,6 +101,7 @@ const Note = ({ close, data }) => {
     if (window)
       window.microm.stop().then(function(result) {
         const mp3 = result
+        setMp3file(new Blob(mp3.buffer, { type: "audio/mpeg" }))
         setUrl(mp3.url)
       })
   }
@@ -72,11 +112,11 @@ const Note = ({ close, data }) => {
       {edit ? (
         <>
           {recording ? (
-            <div onClick={() => stop()} className="m-auto recorder recording">
+            <div onClick={stop} className="m-auto recorder recording">
               <BsStopFill size={20} />
             </div>
           ) : (
-            <div onClick={() => start()} className="m-auto recorder ">
+            <div onClick={start} className="m-auto recorder ">
               <IoMdMic size={20} />
             </div>
           )}
@@ -104,17 +144,12 @@ const Note = ({ close, data }) => {
         {data.IsActive ? data.Text : ""}
       </div>
       {edit ? (
-        <button
-          className="btn button save"
-          onClick={() => {
-            setEdit(false)
-          }}
-        >
+        <button className="btn button save" onClick={save}>
           Kaydet
         </button>
       ) : (
         <div className="d-flex buttons">
-          <AiFillDelete size={30} />
+          <AiFillDelete size={30} onClick={deleteNote} />
           <FaEdit
             size={30}
             onClick={() => {

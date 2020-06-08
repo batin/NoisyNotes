@@ -16,15 +16,14 @@ const Notes = () => {
   const [noises, setNoises] = useState(null)
   const [popup, setPopup] = useState(false)
   const [selected, setSelected] = useState(false)
-
+  const [query, setQuery] = useState("")
   useEffect(() => {
-    // window.document.cookie = { name: "hello", value: "world", "max-age": 3600 }
     fetchNoises()
   }, [])
 
   useEffect(() => {
     fetchNoises()
-  }, [popup, selected])
+  }, [popup, selected, query])
 
   const renderNoises = () => {
     return noises.map((note, key) => {
@@ -47,7 +46,7 @@ const Notes = () => {
       } else {
         const saved = await axios({
           method: "GET",
-          url: "https://noisy-notes.herokuapp.com/user/noises",
+          url: `https://noisy-notes.herokuapp.com/user/noises?q=${query}`,
           headers: {
             Authorization: `Bearer ${state.token}`,
           },
@@ -90,7 +89,14 @@ const Notes = () => {
         {noises && noises.length > 0 ? (
           <div className="d-flex flex-column justify-content-center align-items-center normalState">
             <div className="searchBar d-flex flex-wrap justify-content-between align-items-center">
-              <input type="text" placeholder="Notlarda Ara..." />
+              <input
+                value={query}
+                onChange={e => {
+                  setQuery(e.target.value)
+                }}
+                type="text"
+                placeholder="Notlarda Ara..."
+              />
               <button onClick={() => setPopup(true)} className="btn">
                 <FiPlus size={15} className="plus" /> <span> Yeni Not</span>
               </button>

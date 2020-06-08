@@ -21,11 +21,11 @@ const AddNotePopup = ({ close }) => {
   }, [])
 
   const save = async () => {
-    const formdata = new FormData()
-    formdata.append("title", title)
-    formdata.append("tags", tags.join(", "))
-    formdata.append("file", mp3file)
     try {
+      const formdata = new FormData()
+      formdata.append("title", title)
+      formdata.append("tags", tags.join(", "))
+      formdata.append("file", mp3file)
       await axios({
         method: "POST",
         url: "https://noisy-notes.herokuapp.com/user/noises",
