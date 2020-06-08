@@ -118,7 +118,7 @@ function AuthProvider(props) {
 
   function logout() {
     dispatch({ type: "logout" })
-    document.cookie = "TOKEN=;"
+    document.cookie = ""
     localStorage.removeItem("user")
   }
   function setUser(data) {
