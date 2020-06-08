@@ -5,10 +5,14 @@ const getUser = () =>
   isBrowser() && window.localStorage.getItem("user")
     ? JSON.parse(window.localStorage.getItem("user"))
     : null
-
+const getToken = () => {
+  return isBrowser() && document.cookie !== ""
+    ? document.cookie.split("=")[1]
+    : null
+}
 const initialState = {
   user: getUser(),
-  token: isBrowser() ? localStorage.getItem("TOKEN") : null,
+  token: getToken(),
 }
 
 const AuthContext = createContext({
@@ -104,16 +108,16 @@ function AuthProvider(props) {
       type: "setToken",
       payload: token,
     })
-    localStorage.setItem("TOKEN", token)
+    // localStorage.setItem("TOKEN", token)
+    document.cookie = `TOKEN=${token}; expires=3600;`
     localStorage.setItem("user", JSON.stringify(userData))
-    console.log("login basarili")
   }
 
   function logout() {
     dispatch({ type: "logout" })
-    localStorage.removeItem("TOKEN")
+    // localStorage.removeItem("TOKEN")
+    document.cookie = "TOKEN=;"
     localStorage.removeItem("user")
-    console.log("logout basarili")
   }
   function setUser(data) {
     dispatch({

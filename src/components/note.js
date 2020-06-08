@@ -85,7 +85,6 @@ const Note = ({ close, data }) => {
         },
         data: formdata,
       })
-      console.log(saved)
     } catch (err) {
       console.log(err)
     }
@@ -138,10 +137,6 @@ const Note = ({ close, data }) => {
       )}
       <div className="player">
         <ReactAudioPlayer src={url} controls />
-        <br />
-        {"Is Active: " + data.IsActive}
-        <br />
-        {data.IsActive ? data.Text : ""}
       </div>
       {edit ? (
         <button className="btn button save" onClick={save}>

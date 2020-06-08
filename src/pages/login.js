@@ -15,7 +15,7 @@ const LoginPage = () => {
       navigate("/notes/")
     }
   }, [])
-
+  const [error, setError] = useState(false)
   const [email, setEmail] = useState("")
   const [pass, setPass] = useState("")
   const data = useStaticQuery(graphql`
@@ -31,31 +31,49 @@ const LoginPage = () => {
   `)
 
   const login = async () => {
-    const formdata = new FormData()
-    formdata.append("username", email)
-    formdata.append("password", pass)
-    const login = await axios({
-      method: "POST",
-      url: "https://noisy-notes.herokuapp.com/login",
-      data: formdata,
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    })
-    const me = await axios({
-      method: "GET",
-      url: "https://noisy-notes.herokuapp.com/user/me",
-      headers: { Authorization: `Bearer ${login.data.Token}` },
-    })
+    try {
+      const formdata = new FormData()
+      formdata.append("username", email)
+      formdata.append("password", pass)
+      const login = await axios({
+        method: "POST",
+        url: "https://noisy-notes.herokuapp.com/login",
+        data: formdata,
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      })
+      const me = await axios({
+        method: "GET",
+        url: "https://noisy-notes.herokuapp.com/user/me",
+        headers: { Authorization: `Bearer ${login.data.Token}` },
+      })
 
-    await state.login(me.data, login.data.Token)
-    await navigate("/notes/")
+      await state.login(me.data, login.data.Token)
+      await navigate("/notes/")
+    } catch (err) {
+      setError(true)
+      setTimeout(() => {
+        setError(false)
+      }, 2000)
+      console.log(err)
+    }
   }
 
   return (
     <Layout pageName="Login">
       <Seo title="Login" />
       <section className="login">
+        {error ? (
+          <div
+            class="alert alert-danger position-absolute justify-content-end mt-2 mr-2"
+            role="alert"
+          >
+            Giriş Başarısız
+          </div>
+        ) : (
+          <div />
+        )}
         <div className="container d-flex flex-column justify-content-center align-items-center content">
           <Link to="/">
             <Img

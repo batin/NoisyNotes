@@ -15,6 +15,7 @@ const LoginPage = () => {
       navigate("/notes/")
     }
   })
+  const [error, setError] = useState(false)
   const [name, setName] = useState("")
   const [surname, setSurname] = useState("")
   const [email, setEmail] = useState("")
@@ -32,45 +33,63 @@ const LoginPage = () => {
   `)
 
   const register = async () => {
-    const formdata = new FormData()
-    formdata.append("username", email)
-    formdata.append("password", pass)
-    formdata.append("name", name)
-    formdata.append("surname", surname)
-    const signup = await axios({
-      method: "POST",
-      url: "https://noisy-notes.herokuapp.com/signup",
-      data: formdata,
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    })
-    const formdata2 = new FormData()
-    formdata2.append("username", email)
-    formdata2.append("password", pass)
-    const login = await axios({
-      method: "POST",
-      url: "https://noisy-notes.herokuapp.com/login",
-      data: formdata2,
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    })
-    const me = await axios({
-      method: "GET",
-      url: "https://noisy-notes.herokuapp.com/user/me",
-      headers: { Authorization: `Bearer ${login.data.Token}` },
-    })
+    try {
+      const formdata = new FormData()
+      formdata.append("username", email)
+      formdata.append("password", pass)
+      formdata.append("name", name)
+      formdata.append("surname", surname)
+      const signup = await axios({
+        method: "POST",
+        url: "https://noisy-notes.herokuapp.com/signup",
+        data: formdata,
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      })
+      const formdata2 = new FormData()
+      formdata2.append("username", email)
+      formdata2.append("password", pass)
+      const login = await axios({
+        method: "POST",
+        url: "https://noisy-notes.herokuapp.com/login",
+        data: formdata2,
+        headers: {
+          "content-type": "multipart/form-data",
+        },
+      })
+      const me = await axios({
+        method: "GET",
+        url: "https://noisy-notes.herokuapp.com/user/me",
+        headers: { Authorization: `Bearer ${login.data.Token}` },
+      })
 
-    await state.login(me.data, login.data.Token)
-    await state.setUser(signup.data.User)
-    await navigate("/notes/")
+      await state.login(me.data, login.data.Token)
+      await state.setUser(signup.data.User)
+      await navigate("/notes/")
+    } catch (err) {
+      setError(true)
+      setTimeout(() => {
+        setError(false)
+      }, 2000)
+      console.log(err)
+    }
   }
 
   return (
     <Layout pageName="Register">
       <Seo title="Register" />
       <section className="register">
+        {error ? (
+          <div
+            class="alert alert-danger position-absolute justify-content-end mt-2 mr-2"
+            role="alert"
+          >
+            Kayıt Başarısız
+          </div>
+        ) : (
+          <div />
+        )}
         <div className="container d-flex flex-column justify-content-center align-items-center content">
           <Link to="/">
             <Img
