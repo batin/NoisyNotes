@@ -17,7 +17,9 @@ const Notes = () => {
   const [popup, setPopup] = useState(false)
   const [selected, setSelected] = useState(false)
   const [query, setQuery] = useState("")
+
   useEffect(() => {
+    console.log(state.token)
     fetchNoises()
   }, [])
 
@@ -56,6 +58,7 @@ const Notes = () => {
       }
     } catch (err) {
       console.log(err)
+      navigate("/")
     }
   }
 

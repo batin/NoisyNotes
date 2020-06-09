@@ -14,7 +14,7 @@ const LoginPage = () => {
     if (state.user) {
       navigate("/notes/")
     }
-  }, [])
+  }, [state.user])
   const [error, setError] = useState(false)
   const [email, setEmail] = useState("")
   const [pass, setPass] = useState("")

@@ -2,16 +2,37 @@ import React, { useReducer, createContext } from "react"
 
 const isBrowser = () => typeof window !== "undefined"
 
+const setCookie = (cname, cvalue, hours) => {
+  const d = new Date()
+  d.setTime(d.getTime() + hours * 60 * 60 * 1000)
+  const expires = "expires=" + d.toUTCString()
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/"
+}
+
 const getUser = () =>
   isBrowser() && window.localStorage.getItem("user")
     ? JSON.parse(window.localStorage.getItem("user"))
     : null
 
-const getToken = () => {
-  return isBrowser() && document.cookie !== ""
-    ? document.cookie.split("=")[1]
-    : null
+const getCookie = cname => {
+  var name = cname + "="
+  var ca = document.cookie.split(";")
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i]
+    while (c.charAt(0) === " ") {
+      c = c.substring(1)
+    }
+    if (c.indexOf(name) === 0) {
+      return c.substring(name.length, c.length)
+    }
+  }
+  return ""
 }
+
+const getToken = () => {
+  return isBrowser() ? getCookie("Token") : null
+}
+
 const initialState = {
   user: getUser(),
   token: getToken(),
@@ -110,15 +131,13 @@ function AuthProvider(props) {
       type: "setToken",
       payload: token,
     })
-    const now = new Date()
-    now.setTime(now.getTime() + 1 * 3600 * 1000)
-    document.cookie = `TOKEN=${token}; expires=${now};`
+    setCookie("Token", token, 1)
     localStorage.setItem("user", JSON.stringify(userData))
   }
 
   function logout() {
     dispatch({ type: "logout" })
-    document.cookie = ""
+    setCookie("Token", null, 1)
     localStorage.removeItem("user")
   }
   function setUser(data) {

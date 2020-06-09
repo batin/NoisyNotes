@@ -57,11 +57,11 @@ const AddNotePopup = ({ close }) => {
     <div className="d-flex flex-column align-content-center justify-content-center align-items-center addNotePopup">
       <IoIosCloseCircle className="closeBtn" size={25} onClick={close} />
       {recording ? (
-        <div onClick={() => stop()} className="m-auto recorder recording">
+        <div onClick={stop} role="button" className="m-auto recorder recording">
           <BsStopFill size={20} />
         </div>
       ) : (
-        <div onClick={() => start()} className="m-auto recorder">
+        <div onClick={start} role="button" className="m-auto recorder">
           <IoMdMic size={20} />
         </div>
       )}
