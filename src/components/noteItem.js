@@ -11,12 +11,12 @@ const NoteItem = ({ data, open }) => {
       <FaPlay size={80} className="my-3" />
       <div className="d-flex">
         {data.Tags.map((tag, key) => {
-          return (
+          return key < 3 ?(
             <p key={key}>
               #{tag.Title}
               {key === data.Tags.length - 1 ? "" : ", "}
             </p>
-          )
+          ) : ""
         })}
       </div>
     </div>

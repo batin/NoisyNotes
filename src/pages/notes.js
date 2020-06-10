@@ -36,7 +36,7 @@ const Notes = () => {
           open={() => {
             setSelected(note)
           }}
-        />x
+        />
       )
     })
   }
@@ -88,7 +88,7 @@ const Notes = () => {
         ) : (
           <div />
         )}
-        {noises && noises.length > 0 ? (
+        {noises ? (
           <div className="d-flex flex-column justify-content-center align-items-center normalState">
             <div className="searchBar d-flex flex-wrap justify-content-between align-items-center">
               <input
