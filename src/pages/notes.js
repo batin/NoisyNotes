@@ -36,7 +36,7 @@ const Notes = () => {
           open={() => {
             setSelected(note)
           }}
-        />
+        />x
       )
     })
   }
@@ -58,7 +58,6 @@ const Notes = () => {
       }
     } catch (err) {
       console.log(err)
-      navigate("/")
     }
   }
 
